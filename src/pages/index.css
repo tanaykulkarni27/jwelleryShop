@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.middleGradient{
+    background: linear-gradient( transparent, rgba(240,171,111), transparent);
+    z-index: 1;
+    /* background: linear-gradient( to bottom, transparent 2%, rgba(240,171,111) 90%, transparent 100%); */
+}
+
+.below_part{
+    transform:translateY(-50%);
+    /* background-color: ; */
+}
+
+.mycarousel-container{
+    z-index: 2;
+}
+
+.below{
+    z-index: 1;
+}
+.above{
+    z-index: 2;
+}
