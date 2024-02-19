@@ -34,10 +34,10 @@ export default function Carousel({array}) {
   return (
     <div className="carousel-container" style={{ position: 'relative', zIndex: 2 }}>
       <Slider className='m-0' {...settings}>
-        {array.map((item, index) => 
-          <div key={index}>
-              <div className="flex justify-center items-center m-0" style={{background:item.gradient }}>
-                <img src={item.image} className='inner_image' style={{width:'50%'}}/>
+        {array.collections.nodes.map((item, index) => 
+          <div key={item.id}>
+              <div className="flex justify-center items-center m-0" style={{background:'linear-gradient(transparent,#d3d3d3,transparent)' }}>
+                <img src={item.image.url} key={item.image.id} className='inner_image' style={{width:'50%'}}/>
               </div>
           </div>
         )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel  from '../component/fadeCarousel/carousel';
+
 // images
 import banner_1 from '../assets/images/banner_1.webp'
 import banner_2 from '../assets/images/banner_2.webp'
@@ -11,19 +12,49 @@ import HorizontalCarousel from '../component/hozizontalCarousel/HorizontalCarous
 
 export default function HomePage() {
 
-    const array = [{
-        image:banner_1,
-        gradient:"linear-gradient(gray 2%, pink 90%,transparent 100%)"
-    },
-    {
-        image:banner_2,
-        gradient:"linear-gradient(transparent 2%, rgba(211,211,211) 90%,transparent 100%)"
-
-    },
-    {
-        image:banner_3,
-        gradient:"linear-gradient(transparent 2%, rgba(240,171,111,0.7) 90%,transparent 100%)"
-    }]
+    const array = {
+        "collections": {
+          "nodes": [
+            {
+              "id": "collection_id_1",
+              "title": "Summer Fashion",
+              "handle": "summer-fashion",
+              "image": {
+                "id": "image_id_1",
+                "url": banner_1,
+                "altText": "Summer Fashion Collection",
+                "width": 1200,
+                "height": 900
+              }
+            },
+            {
+              "id": "collection_id_2",
+              "title": "Tech Gadgets",
+              "handle": "tech-gadgets",
+              "image": {
+                "id": "image_id_2",
+                "url": banner_2,
+                "altText": "Latest Tech Gadgets Collection",
+                "width": 1000,
+                "height": 800
+              }
+            },
+            {
+              "id": "collection_id_3",
+              "title": "Fitness Gear",
+              "handle": "fitness-gear",
+              "image": {
+                "id": "image_id_3",
+                "url": banner_3,
+                "altText": "Fitness Gear Collection",
+                "width": 1500,
+                "height": 1000
+              }
+            }
+          ]
+        }
+      }
+      
 
 const video_array = [
     'https://cdn.storista.io/stories/clips/a4b2wuRroWFqisMGLJLLjl9RBrtFKWUvppR00qkDRDNE.mp4',
