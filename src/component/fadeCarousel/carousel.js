@@ -32,12 +32,12 @@ export default function Carousel({array}) {
     }, []);
 
   return (
-    <div className="carousel-container m-0" style={{ position: 'relative', zIndex: 2 }}>
+    <div className="carousel-container" style={{ position: 'relative', zIndex: 2 }}>
       <Slider className='m-0' {...settings}>
         {array.map((item, index) => 
-          <div className='m-0'>
-              <div className='d-flex justify-content-center align-items-center m-0' style={{background:item.gradient}}>
-                <img src={item.image} className='inner_image w-50'/>
+          <div key={index}>
+              <div className="flex justify-center items-center m-0" style={{background:item.gradient }}>
+                <img src={item.image} className='inner_image' style={{width:'50%'}}/>
               </div>
           </div>
         )}
