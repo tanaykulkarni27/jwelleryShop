@@ -6,9 +6,9 @@ import banner_2 from '../assets/images/banner_2.webp'
 import banner_3 from '../assets/images/banner_3.webp'
 
 // css
-import './index.css'
+import './homePage.css'
 
-export default function Home() {
+export default function HomePage() {
 
     const array = [{
         image:banner_1,
@@ -26,8 +26,9 @@ export default function Home() {
 
     return (
         <div>
+            {/* Hello world */}
             <Carousel array={array}/>
-            <div className='w-100 middleGradient below' style={{height:'400px',transform:'translateY(-150px)'}}></div>
+            <div className='middleGradient below' style={{height:'400px',transform:'translateY(-150px)'}}></div> 
         </div>
     );
 }
