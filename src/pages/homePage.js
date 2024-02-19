@@ -41,7 +41,9 @@ const video_array = [
             {/* Hello world */}
             <Carousel array={array}/>
             <div className='middleGradient below' style={{height:'400px',transform:'translateY(-150px)'}}></div> 
-            <HorizontalCarousel items={video_array}/>
+            <div style={{transform:'translateY(-150px)'}}>
+                <HorizontalCarousel items={video_array}/>
+            </div>
             
         </div>
     );
