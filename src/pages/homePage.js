@@ -9,6 +9,7 @@ import banner_3 from '../assets/images/banner_3.webp'
 // css
 import './homePage.css'
 import HorizontalCarousel from '../component/hozizontalCarousel/HorizontalCarousel';
+import { Header } from '../component/header/Header';
 
 export default function HomePage() {
 
@@ -69,6 +70,7 @@ const video_array = [
 
     return (
         <div>
+          <Header />
             {/* Hello world */}
             <Carousel array={array}/>
             <div className='middleGradient below' style={{height:'400px',transform:'translateY(-150px)'}}></div> 
