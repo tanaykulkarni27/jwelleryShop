@@ -2,6 +2,7 @@ import {Link, Form, useParams, useFetcher, useFetchers} from '@remix-run/react';
 import {Image, Money, Pagination} from '@shopify/hydrogen';
 import React, {useRef, useEffect} from 'react';
 
+
 export const NO_PREDICTIVE_SEARCH_RESULTS = [
   {type: 'queries', items: []},
   {type: 'products', items: []},

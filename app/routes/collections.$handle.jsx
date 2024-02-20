@@ -8,6 +8,13 @@ import {
 } from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
 
+
+// SAMPLE DATA
+import {CollectionBannerData} from '../testData/ComponentTestingData';
+// BannerComponent
+import CollectionBanner from '../components/CollectionBanner/CollectionBanner'
+
+
 /**
  * @type {MetaFunction<typeof loader>}
  */
@@ -47,6 +54,7 @@ export default function Collection() {
 
   return (
     <div className="collection">
+      <CollectionBanner BannerData={CollectionBannerData}/>
       <h1>{collection.title}</h1>
       <p className="collection-description">{collection.description}</p>
       <Pagination connection={collection.products}>

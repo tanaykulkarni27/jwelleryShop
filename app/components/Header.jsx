@@ -1,6 +1,8 @@
 import {Await, NavLink} from '@remix-run/react';
 import {Suspense} from 'react';
 import {useRootLoaderData} from '~/root';
+import { IoSearchSharp } from "react-icons/io5";
+import { PiShoppingBag } from "react-icons/pi";
 
 /**
  * @param {HeaderProps}
@@ -10,7 +12,13 @@ export function Header({header, isLoggedIn, cart}) {
   return (
     <header className="header backdrop-blur-md bg-white/30">
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
+        <div style={brand_style}>
+          <div className="bg-white text-transparent p-1">
+            <span className="bg-gradient-to-r from-cyan-500 via-purple-500 to-red-500 text-transparent bg-clip-text shadow-text">
+              {shop.name}
+            </span>
+          </div>
+        </div>
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -65,7 +73,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
             : item.url;
         return (
           <NavLink
-            className="header-menu-item"
+            className="header-menu-item font-bold footer_font"
             end
             key={item.id}
             onClick={closeAside}
@@ -110,14 +118,16 @@ function HeaderMenuMobileToggle() {
 }
 
 function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+  return (
+  <a href="#search-aside">
+     <IoSearchSharp style={{fontSize:'25px'}} /> 
+  </a>);
 }
-
 /**
  * @param {{count: number}}
  */
 function CartBadge({count}) {
-  return <a href="#cart-aside">Cart {count}</a>;
+  return <a href="#cart-aside"><PiShoppingBag style={{fontSize:'25px'}}/> </a>;
 }
 
 /**
@@ -189,6 +199,11 @@ function activeLinkStyle({isActive, isPending}) {
     fontWeight: isActive ? 'bold' : undefined,
     color: isPending ? 'grey' : 'black',
   };
+}
+
+const brand_style = {
+  boxShadow:`0px 0px 0px 10px radial-gradient(circle at center, cyan 0%, purple 25%, red 50%, yellow 75%)`,
+  background:'linear-gradient(to right,cyan,purple,red,yellow)'
 }
 
 /** @typedef {Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>} HeaderProps */
