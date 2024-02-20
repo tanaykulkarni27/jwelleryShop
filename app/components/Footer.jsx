@@ -179,7 +179,7 @@ const Contact_Section = ()=>{
   </div>
   <div>
     <div className="mb-4 border border-rounded rounded-md focus:border-white p-3">
-      <label className="block text-gray-300 text-sm mb-2" for="Email">
+      <label className="block text-gray-300 text-sm mb-2" htmlFor="Email">
         E-mail
       </label>
       <div className="flex flex-row">

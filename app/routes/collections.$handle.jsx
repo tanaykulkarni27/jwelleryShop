@@ -51,12 +51,31 @@ export async function loader({request, params, context}) {
 export default function Collection() {
   /** @type {LoaderReturnData} */
   const {collection} = useLoaderData();
-
+  // console.log(collection.products.nodes)
   return (
     <div className="collection">
-      <CollectionBanner BannerData={CollectionBannerData}/>
-      <h1>{collection.title}</h1>
-      <p className="collection-description">{collection.description}</p>
+      {/* BANNER CODE */}
+      {/* <CollectionBanner BannerData={CollectionBannerData}/> */}
+
+
+      {/* <h1>{collection.title}</h1> */}
+      {/* <p className="collection-description">{collection.description}</p> */}
+      
+      <div className="text-center w-full mb-3 text-xl">
+        {collection.products.nodes.length}&nbsp;Products
+      </div>
+      <div className="w-full">
+        <div className="flex flex-row justify-between items-center px-5 mb-5">
+            {collection.products.nodes.map((item,index)=> 
+            <div className="text-black" key={index}>
+                          {item.title}
+                        </div>
+            
+              )}
+        </div>  
+      </div>
+      
+      
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
@@ -125,6 +144,16 @@ function ProductItem({product, loading}) {
       </small>
     </Link>
   );
+}
+
+
+const get_product_types = (nodes)=>{
+  var types_of_products = new Set();
+  for(var i of nodes){
+    types_of_products.add(i.title);
+  }
+  // console.log(types_of_products);
+  return new Array(types_of_products);
 }
 
 const PRODUCT_ITEM_FRAGMENT = `#graphql
