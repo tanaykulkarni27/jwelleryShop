@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './Carousel.css'
+import slick from 'slick-carousel/slick/slick.css';
+import slick_theme from 'slick-carousel/slick/slick-theme.css';
+import Carousel from './Carousel.css'
 
 export default function FadeCarousel({array}) {
     const [currentSlide, setCurrentSlide] = useState(0); // Track the current slide index
@@ -43,4 +43,12 @@ export default function FadeCarousel({array}) {
       </Slider>
     </div>
   )
+}
+
+export function links(){
+  return [
+    { rel:"stylesheet", src:slick},
+    { rel:"stylesheet", src:slick_theme},
+    { rel:"stylesheet", src:Carousel},
+  ]
 }

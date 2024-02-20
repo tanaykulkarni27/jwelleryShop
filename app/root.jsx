@@ -16,7 +16,8 @@ import favicon from '../public/favicon.svg';
 import resetStyles from './styles/reset.css';
 import appStyles from './styles/app.css';
 import {Layout} from '~/components/Layout';
-
+import compiled_tailwind from '~/styles/output.css'
+import tailwind from '~/styles/tailwind.css'
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
  * @type {ShouldRevalidateFunction}
@@ -39,6 +40,9 @@ export function links() {
   return [
     {rel: 'stylesheet', href: resetStyles},
     {rel: 'stylesheet', href: appStyles},
+    {rel: 'stylesheet', href: compiled_tailwind},
+    {rel: 'stylesheet', href: tailwind},
+    
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',

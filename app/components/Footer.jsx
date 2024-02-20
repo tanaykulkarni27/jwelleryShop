@@ -1,16 +1,38 @@
 import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
+import footer_styles from '../styles/footer/footer.css';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
 export function Footer({menu, shop}) {
-  // console.log(shop);
   return (
-    <footer className="footer">
-      {menu && shop?.primaryDomain?.url && (
-        <FooterMenu menu={menu} primaryDomainUrl={shop.primaryDomain.url} />
-      )}
+    <footer
+      className="footer"
+      style={{
+        background: 'linear-gradient(transparent 3%,rgb(205,205,205),black 100%)',
+      }}
+    >
+
+
+        {/* BRAND NAME */}
+        <div className='text-center mt-40'>
+          <p className="text-4xl footer_font text-white">Fashionwallah</p>
+        </div>
+      
+      {/* FEATURES AND OFFER SECTION */}
+        <FooterFeatures feature_and_offer={STORE_OFFERS_AND_FEATURES}/>
+
+      <div className="flex flex-row justify-between px-48">
+        {/* CONTACT SECTION */}
+        <Contact_Section />
+
+        {/* SECTION 2 LINKS */}
+        {menu && shop?.primaryDomain?.url && (
+          <FooterMenu menu={menu} primaryDomainUrl={shop.primaryDomain.url} />
+        )}
+      </div>
+      <div className="mb-20"></div>
     </footer>
   );
 }
@@ -26,65 +48,62 @@ function FooterMenu({menu, primaryDomainUrl}) {
 
   return (
     <nav className="footer-menu" role="navigation">
-          <div className='flex flex-col'>
-            <div>
-              Hello world
+      <div className="flex flex-col text-gray-200">
+        {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+          if (!item.url) return null;
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primar5yDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+          const isExternal = !url.startsWith('/');
+          return (
+            <div className="my-3">
+              {isExternal ? (
+                <a
+                  href={url}
+                  key={item.id}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {item.title}
+                </a>
+              ) : (
+                <NavLink
+                  end
+                  key={item.id}
+                  prefetch="intent"
+                  style={activeLinkStyle}
+                  to={url}
+                >
+                  {item.title}
+                </NavLink>
+              )}
             </div>
-            <div>
-              Hello world
-            </div>
-            <div>
-              Hello world
-            </div>
-            <div>
-              Hello world
-            </div>
-            <div>
-              Hello world
-            </div>
-            {/* {FALLBACK_FOOTER_MENU.items.map((item) => {
-              if (!item.url) 
-                return null;
-              return <div className='my-16'>{create_tag(item,process_url(item.url,publicStoreDomain,primaryDomainUrl))}</div>
-            })} */}
-          </div>
-        
+          );
+        })}
+      </div>
     </nav>
   );
 }
 
-const process_url = (url,publicStoreDomain,primaryDomainUrl)=>{
-  
-  return url.includes('myshopify.com') ||
-  url.includes(publicStoreDomain) ||
-  url.includes(primaryDomainUrl)
-    ? new URL(url).pathname
-    : url;
-
-}
-
-const create_tag = (item,url)=>{
-  const isExternal = !url.startsWith('/');
-  return isExternal ? (
-    <a
-      href={url}
-      key={item.id}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      {item.title}
-    </a>
-  ) : (
-    <NavLink
-      end
-      key={item.id}
-      prefetch="intent"
-      style={activeLinkStyle}
-      to={url}
-    >
-      {item.title}
-    </NavLink>
-  );
+const FooterFeatures = ({feature_and_offer})=>{
+  return <div className="flex flex-row justify-center items-center my-10">
+            { 
+              feature_and_offer.map((item,index)=>(
+                  <div className="flex flex-col justify-center items-center mx-5 text-4xl">
+                    <div>
+                      {item.emoji}
+                    </div>
+                    <div className="text-center text-white text-2xl">
+                      {item.feature}
+                    </div>
+                  </div>
+              ))
+            }
+         </div>
 }
 
 const FALLBACK_FOOTER_MENU = {
@@ -129,6 +148,82 @@ const FALLBACK_FOOTER_MENU = {
   ],
 };
 
+const STORE_OFFERS_AND_FEATURES = [
+  {
+    "emoji": "🎉",
+    "feature": "Exciting discounts on all products"
+  },
+  {
+    "emoji": "⚡",
+    "feature": "Fast and reliable shipping services"
+  },
+  {
+    "emoji": "🌟",
+    "feature": "Exclusive deals for loyal customers"
+  },
+  {
+    "emoji": "🎁",
+    "feature": "Special gifts with every purchase"
+  }
+];
+
+
+
+// CONTACT ELEMENT
+
+const Contact_Section = ()=>{
+  return <div className="flex flex-col justify-center items-left">
+  <div className="text-white text-4xl my-3 footer_font">Hey there 👋🏼</div>
+  <div className="text-gray-200 my-3 footer_font">
+    Stay in touch for good vibes & no spam.
+  </div>
+  <div>
+    <div className="mb-4 border border-rounded rounded-md focus:border-white p-3">
+      <label className="block text-gray-300 text-sm mb-2" for="Email">
+        E-mail
+      </label>
+      <div className="flex flex-row">
+        <input
+          className="appearance-none
+                    w-full py-2
+                    text-gray-700
+                    leading-tight
+                    bg-transparent
+                    focus:text-white
+                    border-0
+                    footer_font"
+          style={{minWidth:'10vw'}}
+          id="Email"
+          type="text"
+        />
+        <button className="rounded-full text-white bg-none mx-3">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        className="h-6 w-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M9 5l7 7-7 7"
+        />
+      </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+// IMPORTING CSS
+
+export function links() {
+  return [{rel: 'stylesheet', href: footer_styles}];
+}
+
 /**
  * @param {{
  *   isActive: boolean;
@@ -139,7 +234,6 @@ function activeLinkStyle({isActive, isPending}) {
   return {
     fontWeight: isActive ? 'bold' : undefined,
     color: isPending ? 'grey' : 'white',
-
   };
 }
 
