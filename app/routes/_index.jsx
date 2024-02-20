@@ -1,7 +1,9 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Image,Money, Video} from '@shopify/hydrogen';
+import FadeCarousel from '~/components/fadeCarousel/FadeCarousel';
+import HorizontalCarousel, { links as HorizontalCarouselStyles } from '~/components/hozizontalCarousel/HorizontalCarousel';
 
 /**
  * @type {MetaFunction}
@@ -9,6 +11,13 @@ import {Image, Money} from '@shopify/hydrogen';
 export const meta = () => {
   return [{title: 'Hydrogen | Home'}];
 };
+
+export function links() {
+  return [
+    ...HorizontalCarouselStyles()
+  ]
+}
+
 
 /**
  * @param {LoaderFunctionArgs}
@@ -19,14 +28,34 @@ export async function loader({context}) {
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
 
+ 
+
+
   return defer({featuredCollection, recommendedProducts});
 }
 
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  
+  const video_array = [
+    'https://cdn.storista.io/stories/clips/a4b2wuRroWFqisMGLJLLjl9RBrtFKWUvppR00qkDRDNE.mp4',
+    'https://cdn.storista.io/stories/clips/wSUlVSYvnA1ysfKTdVyEjD1u01aHazxgxbOCENaR5PQE.mp4',
+    'https://cdn.storista.io/stories/clips/E5bCjzTDoTMSfG500jnA2YrMqCmdgx1Pz5g4GY37uTc4.mp4',
+    'https://cdn.storista.io/stories/clips/4Ewq5TrORRH6izggc2ISTsfcJ02x0001wrP1av6yC3FZxk.mp4',
+    'https://cdn.storista.io/stories/clips/a4b2wuRroWFqisMGLJLLjl9RBrtFKWUvppR00qkDRDNE.mp4',
+    'https://cdn.storista.io/stories/clips/wSUlVSYvnA1ysfKTdVyEjD1u01aHazxgxbOCENaR5PQE.mp4',
+    'https://cdn.storista.io/stories/clips/E5bCjzTDoTMSfG500jnA2YrMqCmdgx1Pz5g4GY37uTc4.mp4',
+    'https://cdn.storista.io/stories/clips/4Ewq5TrORRH6izggc2ISTsfcJ02x0001wrP1av6yC3FZxk.mp4'
+]
+
   return (
     <div className="home">
+      {/* Banner 
+              <FadeCarousel array={banner_data_query_goes_here} /> 
+      */}
+        {/* <HorizontalCarousel items={video_array} /> */}
+      
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
     </div>

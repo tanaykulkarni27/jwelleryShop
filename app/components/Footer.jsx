@@ -5,6 +5,7 @@ import {useRootLoaderData} from '~/root';
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
 export function Footer({menu, shop}) {
+  // console.log(shop);
   return (
     <footer className="footer">
       {menu && shop?.primaryDomain?.url && (
@@ -25,33 +26,64 @@ function FooterMenu({menu, primaryDomainUrl}) {
 
   return (
     <nav className="footer-menu" role="navigation">
-      {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
-        if (!item.url) return null;
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        const isExternal = !url.startsWith('/');
-        return isExternal ? (
-          <a href={url} key={item.id} rel="noopener noreferrer" target="_blank">
-            {item.title}
-          </a>
-        ) : (
-          <NavLink
-            end
-            key={item.id}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
+          <div className='flex flex-col'>
+            <div>
+              Hello world
+            </div>
+            <div>
+              Hello world
+            </div>
+            <div>
+              Hello world
+            </div>
+            <div>
+              Hello world
+            </div>
+            <div>
+              Hello world
+            </div>
+            {/* {FALLBACK_FOOTER_MENU.items.map((item) => {
+              if (!item.url) 
+                return null;
+              return <div className='my-16'>{create_tag(item,process_url(item.url,publicStoreDomain,primaryDomainUrl))}</div>
+            })} */}
+          </div>
+        
     </nav>
+  );
+}
+
+const process_url = (url,publicStoreDomain,primaryDomainUrl)=>{
+  
+  return url.includes('myshopify.com') ||
+  url.includes(publicStoreDomain) ||
+  url.includes(primaryDomainUrl)
+    ? new URL(url).pathname
+    : url;
+
+}
+
+const create_tag = (item,url)=>{
+  const isExternal = !url.startsWith('/');
+  return isExternal ? (
+    <a
+      href={url}
+      key={item.id}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      {item.title}
+    </a>
+  ) : (
+    <NavLink
+      end
+      key={item.id}
+      prefetch="intent"
+      style={activeLinkStyle}
+      to={url}
+    >
+      {item.title}
+    </NavLink>
   );
 }
 
@@ -107,6 +139,7 @@ function activeLinkStyle({isActive, isPending}) {
   return {
     fontWeight: isActive ? 'bold' : undefined,
     color: isPending ? 'grey' : 'white',
+
   };
 }
 
